@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D m_RigidBody;
+    
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float jumpSpeed = 12f;
 
-    [SerializeField] private float m_MoveSpeed = 5.0f;
+    [SerializeField] float moveAmount;
+    [SerializeField] float jumpAmount;
 
     void Start()
     {
-        m_RigidBody = GetComponent<Rigidbody2D>();
+        
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            m_RigidBody.velocity = new Vector2(0, m_MoveSpeed);
-        }
+        //transform.Translate(5,5,0);
+        moveAmount = Input.GetAxis("Horizontal")*moveSpeed*Time.deltaTime;
+        jumpAmount = Input.GetAxis("Vertical")*jumpSpeed*Time.deltaTime;
+        transform.Translate(moveAmount,jumpAmount,0);
     }
 }
