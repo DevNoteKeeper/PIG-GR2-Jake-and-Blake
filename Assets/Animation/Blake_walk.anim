@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: JAKE
+  m_Name: Blake_walk
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,9 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: 52f7eee5f5167dd478869da247cb3cb7, type: 3}
+      value: {fileID: 664105670, guid: b80413c27b118bf4c9bf2f29a12c6bc7, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: 871d36c4fb507fb45813fa94a73e52c4, type: 3}
+      value: {fileID: 1852307552, guid: b80413c27b118bf4c9bf2f29a12c6bc7, type: 3}
+    - time: 0.16666667
+      value: {fileID: 1207344900, guid: b80413c27b118bf4c9bf2f29a12c6bc7, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,14 +48,15 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 52f7eee5f5167dd478869da247cb3cb7, type: 3}
-    - {fileID: 21300000, guid: 871d36c4fb507fb45813fa94a73e52c4, type: 3}
+    - {fileID: 664105670, guid: b80413c27b118bf4c9bf2f29a12c6bc7, type: 3}
+    - {fileID: 1852307552, guid: b80413c27b118bf4c9bf2f29a12c6bc7, type: 3}
+    - {fileID: 1207344900, guid: b80413c27b118bf4c9bf2f29a12c6bc7, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.16666667
+    m_StopTime: 0.25
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
