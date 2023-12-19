@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jack : MonoBehaviour
+public class Player : MonoBehaviour
 {
 
     [SerializeField]
@@ -44,7 +44,8 @@ public class Jack : MonoBehaviour
         walk = 0f;
         anim.SetBool("isWalk", false);
 
-        if(Input.GetKey(KeyCode.A)) { 
+        if(tag == "Jake"){
+            if(Input.GetKey(KeyCode.A)) { 
             walk = -0.05f;
             toward = -1f;
             anim.SetBool("isWalk", true);
@@ -54,19 +55,44 @@ public class Jack : MonoBehaviour
             toward = 1f;
             anim.SetBool("isWalk", true);
         }
+        } else if(tag == "Blake"){
+            if(Input.GetKey(KeyCode.LeftArrow)) { 
+            walk = -0.05f;
+            toward = -1f;
+            anim.SetBool("isWalk", true);
+            
+        } else if(Input.GetKey(KeyCode.RightArrow)){
+            walk = 0.05f;
+            toward = 1f;
+            anim.SetBool("isWalk", true);
+        }
+        }
+
+        
 
         transform.localScale = new Vector3(toward, 1, 1);
     }
 
     void Jump() {
         
-            if (Input.GetKey(KeyCode.Space) && isGround){
+            if(tag == "Jake"){
+                if (Input.GetKey(KeyCode.Space) && isGround){
                 anim.SetBool("isWalk", true);
                 rigid.velocity = new Vector2(rigid.velocity.x, fixedJumpHeight);
 
                 // If characters take chracter's foot off, "isGround" changed false
                 isGround = false;
             }
+            } else if(tag == "Blake"){
+                if (Input.GetKey(KeyCode.UpArrow) && isGround){
+                anim.SetBool("isWalk", true);
+                rigid.velocity = new Vector2(rigid.velocity.x, fixedJumpHeight);
+
+                // If characters take chracter's foot off, "isGround" changed false
+                isGround = false;
+            }
+            }
+            
 
             if (rigid.velocity.y < 0){
                 anim.SetBool("isWalk", true);
