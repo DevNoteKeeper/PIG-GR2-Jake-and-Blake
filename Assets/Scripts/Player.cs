@@ -12,8 +12,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     float toward = 1f;
     [SerializeField]
-    float jumpForce = 5f;
-    [SerializeField]
     public float fixedJumpHeight = 5f;
     float fallMultiplier = 2.5f;
     float lowJumpMultiplier = 2f;

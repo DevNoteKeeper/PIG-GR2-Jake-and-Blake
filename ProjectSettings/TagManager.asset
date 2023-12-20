@@ -7,6 +7,7 @@ TagManager:
   - Jake
   - Blake
   - Ground
+  - String
   layers:
   - Default
   - TransparentFX
