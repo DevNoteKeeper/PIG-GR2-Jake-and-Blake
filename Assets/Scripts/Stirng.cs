@@ -9,14 +9,25 @@ public class String : MonoBehaviour
 
     LineRenderer lineRenderer;
 
+    public Material lineMaterial; // Drag and drop the LineMaterial here in the inspector
+
+    public Color lineColor = Color.blue; // Set the desired color in the inspector
+
+
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
         if (jackPlayer == null || blakePlayer == null)
         {
-            Debug.LogError("Jack or Blake GameObject is not assigned!");
             return;
         }
+
+                // Set the LineRenderer material
+        lineRenderer.material = lineMaterial;
+
+        // Set the LineRenderer color
+        lineRenderer.startColor = lineColor;
+        lineRenderer.endColor = lineColor;
     }
 
     void Update()
@@ -31,9 +42,6 @@ public class String : MonoBehaviour
             // Set the LineRenderer positions based on the character positions
             lineRenderer.SetPosition(0, jackPlayer.transform.position);
             lineRenderer.SetPosition(1, blakePlayer.transform.position);
-
-            // Output the distances to the console
-            Debug.Log("DistanceX: " + distanceX + ", DistanceY: " + distanceY);
         }
     }
 }
