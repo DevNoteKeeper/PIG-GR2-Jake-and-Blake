@@ -20,11 +20,21 @@ public class Player : MonoBehaviour
     Rigidbody2D rigid;
     Animator anim;
 
+    public Transform otherPlayer;
+    private DistanceJoint2D distanceJoint;
+
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        distanceJoint = gameObject.AddComponent<DistanceJoint2D>();
+        distanceJoint.connectedBody = otherPlayer.GetComponent<Rigidbody2D>();
+        distanceJoint.autoConfigureDistance = false; // Use manual distance configuration
+
+        // Set both x and y axis distance limit
+        distanceJoint.distance = Vector2.Distance(transform.position, otherPlayer.position);
     }
 
     // Update is called once per frame
