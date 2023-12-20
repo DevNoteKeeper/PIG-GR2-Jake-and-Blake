@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     float toward = 1f;
     [SerializeField]
+    float jumpForce = 5f;
+    [SerializeField]
     public float fixedJumpHeight = 5f;
     float fallMultiplier = 2.5f;
     float lowJumpMultiplier = 2f;
@@ -20,8 +22,14 @@ public class Player : MonoBehaviour
     Rigidbody2D rigid;
     Animator anim;
 
-    public Transform otherPlayer;
-    private DistanceJoint2D distanceJoint;
+
+    public GameObject jackPlayer;  // Assign the GameObject of Jack in the Unity Editor
+    public GameObject blakePlayer; // Assign the GameObject of Blake in the Unity Editor
+
+    [SerializeField]
+    private float maxDistance = 5f;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -29,12 +37,6 @@ public class Player : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        distanceJoint = gameObject.AddComponent<DistanceJoint2D>();
-        distanceJoint.connectedBody = otherPlayer.GetComponent<Rigidbody2D>();
-        distanceJoint.autoConfigureDistance = false; // Use manual distance configuration
-
-        // Set both x and y axis distance limit
-        distanceJoint.distance = Vector2.Distance(transform.position, otherPlayer.position);
     }
 
     // Update is called once per frame
@@ -42,11 +44,14 @@ public class Player : MonoBehaviour
     {
         Walk();
         Jump();
+
+        AdjustDistance();
     }
 
     void FixedUpdate() {
         rigid.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         transform.position += new Vector3(walk, 0, 0);
+
     }
 
     void Walk(){
@@ -83,42 +88,47 @@ public class Player : MonoBehaviour
         transform.localScale = new Vector3(toward, 1, 1);
     }
 
-    void Jump() {
-        
-            if(tag == "Jake"){
-                if (Input.GetKey(KeyCode.Space) && isGround){
-                anim.SetBool("isWalk", true);
-                rigid.velocity = new Vector2(rigid.velocity.x, fixedJumpHeight);
+    void Jump()
+{
+    if ((tag == "Jake" && Input.GetKeyDown(KeyCode.Space) && isGround) || (tag == "Blake" && Input.GetKeyDown(KeyCode.UpArrow) && isGround))
+    {
+        anim.SetBool("isWalk", true);
+        rigid.velocity = new Vector2(rigid.velocity.x, fixedJumpHeight);
+        isGround = false;
+    }
 
-                // If characters take chracter's foot off, "isGround" changed false
-                isGround = false;
-            }
-            } else if(tag == "Blake"){
-                if (Input.GetKey(KeyCode.UpArrow) && isGround){
-                anim.SetBool("isWalk", true);
-                rigid.velocity = new Vector2(rigid.velocity.x, fixedJumpHeight);
+    if (rigid.velocity.y < 0)
+    {
+        anim.SetBool("isWalk", true);
+        rigid.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+    }
+    else if (rigid.velocity.y > 0 && !Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.UpArrow))
+    {
+        rigid.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+    }
+}
 
-                // If characters take chracter's foot off, "isGround" changed false
-                isGround = false;
-            }
-            }
-            
+        void AdjustDistance()
+    {
+        if (blakePlayer != null)
+        {
+            float distance = Mathf.Abs(transform.position.x - blakePlayer.transform.position.x);
 
-            if (rigid.velocity.y < 0){
-                anim.SetBool("isWalk", true);
-                rigid.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-            }
-            else if (rigid.velocity.y > 0 && !Input.GetKey(KeyCode.Space)){
-                rigid.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            if (distance > maxDistance)
+            {
+                float adjustment = distance - maxDistance;
+                transform.position = new Vector3(transform.position.x - adjustment * Mathf.Sign(transform.position.x - blakePlayer.transform.position.x), transform.position.y, transform.position.z);
             }
         }
+    }
 
-        private void OnCollisionEnter2D(Collision2D other) {
-
-            // A "Ground" tag is required to be given to the ground and box where the character is standing.
-            if (other.gameObject.CompareTag("Ground")) {
-                isGround = true;
-            }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isGround = true;
         }
+    }
+
 
 }
