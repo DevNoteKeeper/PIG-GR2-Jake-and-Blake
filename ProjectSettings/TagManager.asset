@@ -8,6 +8,7 @@ TagManager:
   - Blake
   - Ground
   - String
+  - Box
   layers:
   - Default
   - TransparentFX
