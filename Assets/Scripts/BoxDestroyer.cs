@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BoxDestroyer : MonoBehaviour
 {
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Box"))
+        if (collision.gameObject.CompareTag("Box"))
         {
             DestroyBox(collision.gameObject);
+
+            Debug.Log("Destroyed a box after collision: " + collision.gameObject.name);
         }
     }
 
@@ -16,7 +16,5 @@ public class BoxDestroyer : MonoBehaviour
     {
         // Immediately destroy the box object.
         Destroy(box);
-
-        Debug.Log("Destroyed box after a collision: " + box.name);
     }
 }
