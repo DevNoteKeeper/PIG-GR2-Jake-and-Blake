@@ -18,4 +18,12 @@ public class gameManager : MonoBehaviour
     {
         
     }
+
+    public void Home(){
+        SceneManager.LoadScene("StartScene");
+    }
+
+    public void LevelSelect(){
+        SceneManager.LoadScene("LevelSelect");
+    }
 }
