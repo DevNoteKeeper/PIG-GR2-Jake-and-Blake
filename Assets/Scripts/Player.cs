@@ -133,6 +133,7 @@ public class Player : MonoBehaviour
         {
             isGround = true;
             anim.SetBool("isSnowLand", false);
+            isOnSnowLand=false;
            
         }else if(other.gameObject.CompareTag("snowLand")){
             isOnSnowLand=true;
