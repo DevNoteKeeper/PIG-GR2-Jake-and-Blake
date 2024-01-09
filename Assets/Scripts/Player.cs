@@ -5,10 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField]
-    private float moveSpeed;
-    [SerializeField]
-    float walk = 0;
+    public float moveSpeed;
+    public float walk = 0;
     [SerializeField]
     float toward = 1f;
     [SerializeField]
@@ -16,7 +14,7 @@ public class Player : MonoBehaviour
     float fallMultiplier = 2.5f;
     float lowJumpMultiplier = 2f;
     private bool isGround = true;
-
+    private bool isOnSnowLand = false;
     Rigidbody2D rigid;
     Animator anim;
 
@@ -44,12 +42,21 @@ public class Player : MonoBehaviour
         Jump();
 
         AdjustDistance();
+
     }
 
     void FixedUpdate() {
+        // bool isOnSnowLand = false;
+        // Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position,0.2f);
+        // foreach(Collider2D collider in colliders){
+        //     if(collider.CompareTag("snowLand")){
+        //         isOnSnowLand=true;
+        //         break;
+        //     }
+        // }
+        float speedMultiplier = isOnSnowLand ? 5.0f : 0.5f;
         rigid.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        transform.position += new Vector3(walk, 0, 0);
-
+        transform.position += new Vector3(walk*speedMultiplier, 0, 0);
     }
 
     void Walk(){
@@ -125,6 +132,12 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             isGround = true;
+            anim.SetBool("isSnowLand", false);
+           
+        }else if(other.gameObject.CompareTag("snowLand")){
+            isOnSnowLand=true;
+            anim.SetBool("isSnowLand", true);
+            
         }
     }
 
