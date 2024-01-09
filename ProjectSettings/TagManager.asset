@@ -8,7 +8,11 @@ TagManager:
   - Blake
   - Ground
   - String
+<<<<<<< HEAD
   - snowLand
+=======
+  - Box
+>>>>>>> 2470198e5552e4039283f1fe6068d0ffa197c895
   layers:
   - Default
   - TransparentFX
