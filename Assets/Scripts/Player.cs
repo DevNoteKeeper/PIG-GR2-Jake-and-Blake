@@ -57,6 +57,10 @@ public class Player : MonoBehaviour
         float speedMultiplier = isOnSnowLand ? 5.0f : 0.5f;
         rigid.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         transform.position += new Vector3(walk*speedMultiplier, 0, 0);
+
+        if(rigid.position.y<-5f){
+            FindObjectOfType<GameManager>().EndGame();
+        }
     }
 
     void Walk(){
