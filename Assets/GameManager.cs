@@ -13,9 +13,7 @@ public class GameManager : MonoBehaviour
     private float timer;
     private bool hasReachedDoor = false;
     private bool isTimeOver = false;
-    public Button goNextSceneButton;
-    public Button goStartSceneButton;
-    public Button startAgainButton;
+    
     public float restartDelay=2f;
     private bool gameHasEnded = false;
 
@@ -26,9 +24,6 @@ public class GameManager : MonoBehaviour
         timer = timeLimit;
         SuccessModal.SetActive(false); 
         FailureModal.SetActive(false); 
-        goNextSceneButton.onClick.AddListener(ChangeScene);
-        goStartSceneButton.onClick.AddListener(goHome);
-        startAgainButton.onClick.AddListener(startAgain);
 
     }
 
@@ -76,25 +71,5 @@ public class GameManager : MonoBehaviour
             player.enabled = false;
             gameHasEnded = true;
         }
-    }
-
-    
-
-    
-    void ChangeScene(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-    }
-    void goHome(){
-        SceneManager.LoadScene("StartScene");
-    }
-    void startAgain(){
-        Invoke("Restart",restartDelay);
-    }
-
-    
-         
-    void Restart(){
-        SceneManager.LoadScene("StartScene");
-
     }
 }

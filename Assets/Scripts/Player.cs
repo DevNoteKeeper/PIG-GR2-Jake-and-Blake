@@ -58,9 +58,7 @@ public class Player : MonoBehaviour
         rigid.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         transform.position += new Vector3(walk*speedMultiplier, 0, 0);
 
-        if(rigid.position.y<-5f){
-            FindObjectOfType<GameManager>().EndGame();
-        }
+       
     }
 
     void Walk(){
