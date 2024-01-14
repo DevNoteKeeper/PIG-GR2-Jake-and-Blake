@@ -7,7 +7,7 @@ public class ButtonChangeScene1 : MonoBehaviour
     public Button[] buttons;
     public float restartDelay = 2f; 
 
-    void Start(){
+    public void Start(){
         foreach (Button button in buttons)
         {
         if (button != null)
@@ -39,20 +39,21 @@ public class ButtonChangeScene1 : MonoBehaviour
         }
     }
 
-    void ChangeScene(){
+    public void ChangeScene(){
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex + 1);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
-    void goHome(){
+    public void goHome(){
         SceneManager.LoadScene("StartScene");
     }
-    void startAgain(){
+    public void startAgain(){
         Invoke("Restart",restartDelay);
     }
 
-    void Restart(){
+    public void Restart(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
+
 }

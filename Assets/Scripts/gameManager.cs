@@ -1,58 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class gameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
+    public Player player;
+    public GameObject SuccessModal;
+    public GameObject FailureModal;
+    public GameObject JackPrefab;
+    public GameObject BlackPrefab;
+    public GameObject StringPrefab;
+
+    private GameObject Jack;
+    private GameObject Black;  // 수정: BlackPrefab을 Black으로 변경
+
+    private bool hasReachedDoor = false;
     
-    public Text timeTxt;
-    [SerializeField] 
-    public float totalTime = 60f;
-    private float currentTime;
+    public float restartDelay = 2f;
+    private bool gameHasEnded = false;
 
-    public bool isTimeOVer = false;
+    public Timer timer;
 
-    // Start is called before the first frame update
     void Start()
     {
-        currentTime = totalTime;
-        isTimeOVer = false;
+        SuccessModal.SetActive(false);
+        FailureModal.SetActive(false);
+
+        Jack = Instantiate(JackPrefab, new Vector3(-7, 1, 0), Quaternion.identity);
+        Black = Instantiate(BlackPrefab, new Vector3(-7, 1, 0), Quaternion.identity);
+
+        Instantiate(StringPrefab, new Vector3(-6, -2, 0), Quaternion.identity);
     }
 
-
-
-    // Update is called once per frame
     void Update()
     {
-        TimeFlow();
+        ShowModal();
     }
 
-    void TimeFlow(){
-        if(currentTime <= 0){
-            isTimeOVer = true;
-            currentTime = 0f;
-        } else{
-            currentTime -= Time.deltaTime;
-            UpdateTimeDisplay();
+    void ShowModal()
+{
+    if (Jack != null && Black != null)  
+    {
+        if (timer.isTimeOver == false && hasReachedDoor)
+        {
+            SuccessModal.SetActive(true);
         }
-    }
 
-    void UpdateTimeDisplay(){
-        int minutes = Mathf.FloorToInt(currentTime / 60);
-        int seconds = Mathf.FloorToInt(currentTime % 60);
-
-        timeTxt.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
-
-
-    public void Home(){
-        SceneManager.LoadScene("StartScene");
-    }
-
-    public void LevelSelect(){
-        SceneManager.LoadScene("LevelSelect");
+        if (Jack.transform.position.y < -5f || Black.transform.position.y < -5f || timer.isTimeOver == true)
+        {
+            FailureModal.SetActive(true);
+            player.enabled = false;
+        }
     }
 }
 
+
+    // succeeding condition one
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "door")
+        {
+            hasReachedDoor = true;
+        }
+    }
+
+    // failing condition one (obstacle)
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.collider.tag == "mushroom")
+        {
+            player.enabled = false;
+            gameHasEnded = true;
+        }
+    }
+}

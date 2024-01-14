@@ -6,6 +6,7 @@ public class String : MonoBehaviour
 {
     public GameObject jackPlayer;
     public GameObject blakePlayer;
+    
 
     LineRenderer lineRenderer;
 
