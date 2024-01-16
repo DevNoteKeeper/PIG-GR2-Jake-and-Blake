@@ -8,11 +8,11 @@ public class GameManager : MonoBehaviour
     public GameObject SuccessModal;
     public GameObject FailureModal;
     public GameObject JackPrefab;
-    public GameObject BlackPrefab;
+    public GameObject BlakePrefab;
     public GameObject StringPrefab;
 
     private GameObject Jack;
-    private GameObject Black;  // 수정: BlackPrefab을 Black으로 변경
+    private GameObject Blake; 
 
     private bool hasReachedDoor = false;
     
@@ -21,16 +21,26 @@ public class GameManager : MonoBehaviour
 
     public Timer timer;
 
-    void Start()
-    {
-        SuccessModal.SetActive(false);
-        FailureModal.SetActive(false);
+void Start()
+{
+    SuccessModal.SetActive(false);
+    FailureModal.SetActive(false);
 
-        Jack = Instantiate(JackPrefab, new Vector3(-7, 1, 0), Quaternion.identity);
-        Black = Instantiate(BlackPrefab, new Vector3(-7, 1, 0), Quaternion.identity);
+    Jack = Instantiate(JackPrefab, new Vector3(-7, 1, 0), Quaternion.identity);
+    Blake = Instantiate(BlakePrefab, new Vector3(-7, 1, 0), Quaternion.identity);
+    Instantiate(StringPrefab, new Vector3(-7, 1, 0), Quaternion.identity);
 
-        Instantiate(StringPrefab, new Vector3(-6, -2, 0), Quaternion.identity);
-    }
+    // 선을 나타낼 GameObject 및 LineConnector 스크립트 추가
+    GameObject lineConnectorGameObject = new GameObject("LineConnector");
+    LineConnector lineConnector = lineConnectorGameObject.AddComponent<LineConnector>();
+
+    // 선의 양 끝에 있는 캐릭터 설정
+    lineConnector.Jack = Jack.transform;
+    lineConnector.Blake = Blake.transform;
+}
+
+
+
 
     void Update()
     {
@@ -39,14 +49,14 @@ public class GameManager : MonoBehaviour
 
     void ShowModal()
 {
-    if (Jack != null && Black != null)  
+    if (Jack != null && Blake != null)  
     {
         if (timer.isTimeOver == false && hasReachedDoor)
         {
             SuccessModal.SetActive(true);
         }
 
-        if (Jack.transform.position.y < -5f || Black.transform.position.y < -5f || timer.isTimeOver == true)
+        if (Jack.transform.position.y < -5f || Blake.transform.position.y < -5f || timer.isTimeOver == true)
         {
             FailureModal.SetActive(true);
             player.enabled = false;

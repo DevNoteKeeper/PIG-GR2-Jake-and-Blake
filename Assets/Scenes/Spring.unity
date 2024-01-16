@@ -156,8 +156,8 @@ MonoBehaviour:
   SuccessModal: {fileID: 168439976}
   FailureModal: {fileID: 824138434}
   JackPrefab: {fileID: 2356949257094404775, guid: 0b8025947f51f8043a365cfe39dd76c9, type: 3}
-  BlackPrefab: {fileID: 890044483153179431, guid: 495851f23504d674cbfcd1fc6c009b93, type: 3}
-  StringPrefab: {fileID: 9052623760525881236, guid: 0a75aaf17efb267418c7e9d6857821ed, type: 3}
+  BlakePrefab: {fileID: 890044483153179431, guid: 495851f23504d674cbfcd1fc6c009b93, type: 3}
+  StringPrefab: {fileID: 8825833919599838131, guid: 2dd355eb5686e3741b37660f0be251a7, type: 3}
   restartDelay: 2
   timer: {fileID: 1056882000}
 --- !u!4 &44163541
