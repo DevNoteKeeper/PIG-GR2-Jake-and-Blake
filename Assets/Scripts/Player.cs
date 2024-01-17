@@ -113,6 +113,17 @@ public class Player : MonoBehaviour
     {
         rigid.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
     }
+
+        if (isOnGround())
+    {
+        isGround = true;
+    }
+}
+
+bool isOnGround()
+{
+    RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.2f);
+    return hit.collider != null && hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Box");
 }
 
         void AdjustDistance()
@@ -131,7 +142,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Box"))
         {
             isGround = true;
             anim.SetBool("isSnowLand", false);
