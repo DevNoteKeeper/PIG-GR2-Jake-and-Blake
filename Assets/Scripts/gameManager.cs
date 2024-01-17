@@ -43,11 +43,27 @@ public class GameManager : MonoBehaviour
             SaveSystem.SavePlayerData(initialData);
         }
     }
+    public Camera mainCamera;
 
     void Update()
     {
         ShowModal();
+       if (Blake != null && mainCamera != null)
+        {
+            UpdateCameraPosition();
+        }
+}
+
+    void UpdateCameraPosition()
+    {
+        if (Blake != null && mainCamera != null)
+        {
+           Vector3 playerPos = Blake.transform.position;
+           mainCamera.transform.position = new Vector3(playerPos.x, playerPos.y, -10);
+           Debug.Log("Camera Position: " + mainCamera.transform.position);
+        }
     }
+
 
     void InitializeCharacters()
     {
