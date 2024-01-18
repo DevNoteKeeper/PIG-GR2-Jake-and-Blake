@@ -123,9 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ee175e8b2f75a4fb03884f09b9ba06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  walk: 0.01
-  toward: 1
+  walkSpeed: 0.2
   fixedJumpHeight: 10
   jackPlayer: {fileID: 2356949257094404775}
   blakePlayer: {fileID: 890044483153179431, guid: 495851f23504d674cbfcd1fc6c009b93, type: 3}
