@@ -20,8 +20,6 @@ public class Player : MonoBehaviour
     public GameObject jackPlayer;  // Assign the GameObject of Jack in the Unity Editor
     public GameObject blakePlayer; // Assign the GameObject of Blake in the Unity Editor
 
-    [SerializeField]
-    private float maxDistance = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +33,6 @@ public class Player : MonoBehaviour
     {
         Walk();
         Jump();
-
-        AdjustDistance();
     }
 
     void FixedUpdate()
@@ -126,19 +122,7 @@ public class Player : MonoBehaviour
         return hit.collider != null && hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Box");
     }
 
-    void AdjustDistance()
-    {
-        if (blakePlayer != null)
-        {
-            float distance = Mathf.Abs(transform.position.x - blakePlayer.transform.position.x);
 
-            if (distance > maxDistance)
-            {
-                float adjustment = distance - maxDistance;
-                transform.position = new Vector3(transform.position.x - adjustment * Mathf.Sign(transform.position.x - blakePlayer.transform.position.x), transform.position.y, transform.position.z);
-            }
-        }
-    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
