@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float moveSpeed;
-    public float walk = 0;
     [SerializeField]
-    float toward = 1f;
+    public float walkSpeed = 0.05f;
+    private float walk = 0;
+    private float toward = 1f;
     [SerializeField]
     public float fixedJumpHeight = 5f;
-    float fallMultiplier = 2.5f;
-    float lowJumpMultiplier = 2f;
+    private float fallMultiplier = 2.5f;
+    private float lowJumpMultiplier = 2f;
     private bool isGround = true;
     private bool isOnSnowLand = false;
-    Rigidbody2D rigid;
-    Animator anim;
+    private Rigidbody2D rigid;
+    private Animator anim;
 
     public GameObject jackPlayer;  // Assign the GameObject of Jack in the Unity Editor
     public GameObject blakePlayer; // Assign the GameObject of Blake in the Unity Editor
@@ -63,14 +63,14 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.A))
             {
-                walk = -0.05f;
+                walk = -walkSpeed;
                 toward = -1f;
                 anim.SetBool("isWalk", true);
 
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                walk = 0.05f;
+                walk = walkSpeed;
                 toward = 1f;
                 anim.SetBool("isWalk", true);
             }
@@ -79,14 +79,14 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                walk = -0.05f;
+                walk = -walkSpeed;
                 toward = -1f;
                 anim.SetBool("isWalk", true);
 
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                walk = 0.05f;
+                walk = walkSpeed;
                 toward = 1f;
                 anim.SetBool("isWalk", true);
             }
