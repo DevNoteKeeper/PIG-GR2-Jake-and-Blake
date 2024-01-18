@@ -153,13 +153,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  SuccessModal: {fileID: 168439976}
-  FailureModal: {fileID: 824138434}
   JackPrefab: {fileID: 2356949257094404775, guid: 0b8025947f51f8043a365cfe39dd76c9, type: 3}
   BlakePrefab: {fileID: 890044483153179431, guid: 495851f23504d674cbfcd1fc6c009b93, type: 3}
   timer: {fileID: 1056882000}
   restartDelay: 2
   mainCamera: {fileID: 1191354146}
+  SuccessModal: {fileID: 168439976}
+  FailureModal: {fileID: 824138434}
 --- !u!4 &44163541
 Transform:
   m_ObjectHideFlags: 0
@@ -28350,7 +28350,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2465470561502619917, guid: e0d174ef408d23c43a065900ac4cd7dc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 531477134181439480, guid: e0d174ef408d23c43a065900ac4cd7dc, type: 3}

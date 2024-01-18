@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private float walk = 0;
     private float toward = 1f;
     [SerializeField]
-    public float fixedJumpHeight = 5f;
+    public float fixedJumpHeight = 15f;
     private float fallMultiplier = 2.5f;
     private float lowJumpMultiplier = 2f;
     private bool isGround = true;
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if ((tag == "Jake" && Input.GetKeyDown(KeyCode.Space) && isGround) || (tag == "Blake" && Input.GetKeyDown(KeyCode.UpArrow) && isGround))
+        if ((tag == "Jake" && Input.GetKeyDown(KeyCode.W) && isGround) || (tag == "Blake" && Input.GetKeyDown(KeyCode.UpArrow) && isGround))
         {
             anim.SetBool("isWalk", true);
             rigid.velocity = new Vector2(rigid.velocity.x, fixedJumpHeight);

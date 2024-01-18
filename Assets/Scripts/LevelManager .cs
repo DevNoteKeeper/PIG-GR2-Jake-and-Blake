@@ -8,6 +8,12 @@ public class LevelManager : MonoBehaviour
         PlayerData playerData = new PlayerData();
         playerData.currentLevel = nextLevel;
 
+        // 다음 레벨이 더 크면 highestPassedLevel 업데이트
+        if (nextLevel > playerData.highestPassedLevel)
+        {
+            playerData.highestPassedLevel = nextLevel;
+        }
+
         SaveSystem.SavePlayerData(playerData);
     }
 }

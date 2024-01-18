@@ -155,6 +155,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c12a0036fda7247a5987e7bc0f7ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  springButton: {fileID: 1675698957}
+  summerButton: {fileID: 514491500}
+  autumnButton: {fileID: 1566673438}
+  winterButton: {fileID: 144290899}
+  summerLockImage: {fileID: 1706101895}
+  autumnLockImage: {fileID: 2038597101}
+  winterLockImage: {fileID: 512280044}
 --- !u!114 &105807196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,7 +556,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.045515776, y: 2.8778715, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4742, y: 0.4742, z: 0.4742}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
