@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 130f1bc010e3580429327d14a5d367c2
+  - enabled: 1
+    path: Assets/Scenes/LevelSelect.unity
+    guid: 43ac47c096e3ea64a94a0b3ee39e7fce
+  - enabled: 1
     path: Assets/Scenes/Spring.unity
     guid: b04b420fff6bc91448075044b338aa77
   - enabled: 1
@@ -21,12 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Winter.unity
     guid: 32705f878e21e50478ccebb2df5fe50d
   - enabled: 1
-    path: Assets/Scenes/StartScene.unity
-    guid: 130f1bc010e3580429327d14a5d367c2
-  - enabled: 1
-    path: Assets/Scenes/LevelSelect.unity
-    guid: 43ac47c096e3ea64a94a0b3ee39e7fce
-  - enabled: 1
+    path: Assets/Scenes/Outro.unity
+    guid: 9bff8e87159c0b9418ce66800fe359d8
+  - enabled: 0
     path: Assets/Scenes/PlayerMovement.unity
     guid: 54ed2c35bdb8da3439eb5087d77c8897
   m_configObjects: {}
