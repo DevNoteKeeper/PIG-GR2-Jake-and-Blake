@@ -52,5 +52,6 @@ public class LineConnector : MonoBehaviour
             // 캐릭터의 위치에 따라 선 업데이트
             lineRenderer.SetPosition(1, Blake.position);
         }
+        
     }
 }
