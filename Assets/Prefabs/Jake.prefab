@@ -127,7 +127,7 @@ MonoBehaviour:
   fixedJumpHeight: 10
   jackPlayer: {fileID: 2356949257094404775}
   blakePlayer: {fileID: 890044483153179431, guid: 495851f23504d674cbfcd1fc6c009b93, type: 3}
-  maxDistance: 5
+  maxDistance: 10
 --- !u!50 &554392101441005668
 Rigidbody2D:
   serializedVersion: 4

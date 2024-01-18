@@ -189,7 +189,7 @@ MonoBehaviour:
   fixedJumpHeight: 10
   jackPlayer: {fileID: 2356949257094404775, guid: 0b8025947f51f8043a365cfe39dd76c9, type: 3}
   blakePlayer: {fileID: 890044483153179431}
-  maxDistance: 5
+  maxDistance: 10
 --- !u!120 &8426485742992970274
 LineRenderer:
   serializedVersion: 2

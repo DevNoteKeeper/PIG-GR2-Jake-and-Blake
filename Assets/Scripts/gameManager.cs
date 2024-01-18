@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour
 
     void InitializeCharacters()
     {
-        Jack = Instantiate(JackPrefab, new Vector3(-7, 1, 0), Quaternion.identity);
         Blake = Instantiate(BlakePrefab, new Vector3(-7, 1, 0), Quaternion.identity);
+        Jack = Instantiate(JackPrefab, new Vector3(-7, 1, 0), Quaternion.identity);
     }
 
     void InitializeLineConnector()
@@ -76,8 +76,9 @@ public class GameManager : MonoBehaviour
         GameObject lineConnectorGameObject = new GameObject("LineConnector");
         LineConnector lineConnector = lineConnectorGameObject.AddComponent<LineConnector>();
 
-        lineConnector.Jack = Jack.transform;
+        
         lineConnector.Blake = Blake.transform;
+        lineConnector.Jack = Jack.transform;
     }
 
     void ShowModal()
