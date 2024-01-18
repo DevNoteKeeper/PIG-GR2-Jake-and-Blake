@@ -2160,8 +2160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeTxt: {fileID: 230843392}
-  totalTime: 10
-  isTimeOver: 0
+  totalTime: 60
 --- !u!114 &907676217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34198,9 +34197,9 @@ MonoBehaviour:
   FailureModal: {fileID: 247258802}
   JackPrefab: {fileID: 2356949257094404775, guid: 0b8025947f51f8043a365cfe39dd76c9, type: 3}
   BlakePrefab: {fileID: 890044483153179431, guid: 495851f23504d674cbfcd1fc6c009b93, type: 3}
-  StringPrefab: {fileID: 9052623760525881236, guid: 0a75aaf17efb267418c7e9d6857821ed, type: 3}
+  timer: {fileID: 907676216}
   restartDelay: 2
-  timer: {fileID: 0}
+  mainCamera: {fileID: 1995327161}
 --- !u!4 &1870747755
 Transform:
   m_ObjectHideFlags: 0
@@ -34734,7 +34733,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.6745098, g: 0.8980393, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

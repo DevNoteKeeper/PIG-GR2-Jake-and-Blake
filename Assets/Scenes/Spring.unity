@@ -157,8 +157,9 @@ MonoBehaviour:
   FailureModal: {fileID: 824138434}
   JackPrefab: {fileID: 2356949257094404775, guid: 0b8025947f51f8043a365cfe39dd76c9, type: 3}
   BlakePrefab: {fileID: 890044483153179431, guid: 495851f23504d674cbfcd1fc6c009b93, type: 3}
-  restartDelay: 2
   timer: {fileID: 1056882000}
+  restartDelay: 2
+  mainCamera: {fileID: 1191354146}
 --- !u!4 &44163541
 Transform:
   m_ObjectHideFlags: 0
@@ -29088,7 +29089,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeTxt: {fileID: 1391492092}
   totalTime: 60
-  isTimeOver: 0
 --- !u!1 &1061755078
 GameObject:
   m_ObjectHideFlags: 0
@@ -29695,7 +29695,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.6745098, g: 0.8980393, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -29763,7 +29763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c09ca3556f3ab04bb9179426fd58c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thingToFollow: {fileID: 890044483153179431, guid: 495851f23504d674cbfcd1fc6c009b93, type: 3}
+  thingToFollow: {fileID: 0}
 --- !u!1 &1238454813
 GameObject:
   m_ObjectHideFlags: 0
