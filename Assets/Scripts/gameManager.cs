@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public Player player;
-    public GameObject SuccessModal;
-    public GameObject FailureModal;
     public GameObject JackPrefab;
     public GameObject BlakePrefab;
     public Timer timer;
@@ -14,13 +13,14 @@ public class GameManager : MonoBehaviour
     private GameObject Jack;
     private GameObject Blake;
 
-    private bool hasReachedDoor = false;
     private bool gameHasEnded = false;
 
     public float restartDelay = 2f;
-
-    // Fix: Declare completionTime
     private float completionTime;
+
+    public Camera mainCamera;
+    public GameObject SuccessModal;
+    public GameObject FailureModal;
 
     void Start()
     {
@@ -43,32 +43,28 @@ public class GameManager : MonoBehaviour
             SaveSystem.SavePlayerData(initialData);
         }
     }
-    public Camera mainCamera;
 
     void Update()
     {
-        ShowModal();
-       if (Blake != null && mainCamera != null)
+        if (Blake != null && mainCamera != null)
         {
             UpdateCameraPosition();
         }
-}
+
+        CheckCompletionConditions();
+    }
 
     void UpdateCameraPosition()
     {
-        if (Blake != null && mainCamera != null)
-        {
-           Vector3 playerPos = Blake.transform.position;
-           mainCamera.transform.position = new Vector3(playerPos.x, playerPos.y, -10);
-           Debug.Log("Camera Position: " + mainCamera.transform.position);
-        }
+        Vector3 playerPos = Blake.transform.position;
+        mainCamera.transform.position = new Vector3(playerPos.x, playerPos.y, -10);
+        Debug.Log("Camera Position: " + mainCamera.transform.position);
     }
-
 
     void InitializeCharacters()
     {
-        Jack = Instantiate(JackPrefab, new Vector3(-7, 1, 0), Quaternion.identity);
         Blake = Instantiate(BlakePrefab, new Vector3(-7, 1, 0), Quaternion.identity);
+        Jack = Instantiate(JackPrefab, new Vector3(-7, 1, 0), Quaternion.identity);
     }
 
     void InitializeLineConnector()
@@ -76,33 +72,45 @@ public class GameManager : MonoBehaviour
         GameObject lineConnectorGameObject = new GameObject("LineConnector");
         LineConnector lineConnector = lineConnectorGameObject.AddComponent<LineConnector>();
 
-        lineConnector.Jack = Jack.transform;
         lineConnector.Blake = Blake.transform;
+        lineConnector.Jack = Jack.transform;
     }
 
-    void ShowModal()
+    void CheckCompletionConditions()
     {
         if (Jack != null && Blake != null)
         {
-            if (!timer.IsTimeOver && hasReachedDoor)
+            // Jack과 Blake이 모두 문에 도달했을 때
+            if (!timer.IsTimeOver && CheckDoorReached(Jack) && CheckDoorReached(Blake))
             {
                 completionTime = timer.CompletionTime;
 
-                SuccessModal.SetActive(true);
-                SuccessModal.GetComponentInChildren<Text>().text = "Success!\nTime: " + completionTime.ToString("F2") + " seconds";
+                // 두 캐릭터가 문에 도달하면 성공 모달 표시
+                ShowSuccessModal(completionTime);
             }
 
             if (Jack.transform.position.y < -5f || Blake.transform.position.y < -5f || timer.IsTimeOver)
             {
-                FailureModal.SetActive(true);
-                player.enabled = false;
+                // 실패 모달 표시
+                ShowFailureModal();
 
-                if (!gameHasEnded)
-                {
-                    gameHasEnded = true;
-                    Invoke("RestartGame", restartDelay);
-                }
+                // 게임 종료 처리
+                HandleGameEnd();
             }
+        }
+    }
+
+    void HandleGameEnd()
+    {
+        if (player != null)
+        {
+            player.enabled = false;
+        }
+
+        if (!gameHasEnded)
+        {
+            gameHasEnded = true;
+            Invoke("RestartGame", restartDelay);
         }
     }
 
@@ -111,11 +119,77 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    void ShowSuccessModal(float completionTime)
+    {
+        StartCoroutine(DelayedFadeOutCharactersAndShowModal(completionTime));
+    }
+
+    void ShowFailureModal()
+    {
+        FailureModal.SetActive(true);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "door")
+        // 이 부분은 문과 충돌 여부를 확인할 때 사용하는 코드입니다.
+        if (collision.CompareTag("Door"))
         {
-            hasReachedDoor = true;
+            // 문에 도달하면 해당 캐릭터를 천천히 사라지게 함
+            StartCoroutine(FadeOutCharacter(collision.gameObject, 2f));
         }
+    }
+
+    bool CheckDoorReached(GameObject character)
+    {
+        GameObject door = GameObject.FindGameObjectWithTag("Door");
+        
+        if (door != null)
+        {
+            // 캐릭터와 문 사이의 거리를 측정하여 문에 도달했는지 여부를 판단합니다.
+            float distanceToDoor = Vector2.Distance(character.transform.position, door.transform.position);
+            
+            return distanceToDoor < 1.6f; // 예시로 1.0f라는 거리 내에 있다면 문에 도달했다고 판단합니다. 조건을 적절히 수정하세요.
+        }
+        else
+        {
+            Debug.LogError("Door not found. Make sure the 'Door' object has the 'Door' tag.");
+            return false;
+        }
+    }
+
+    IEnumerator DelayedFadeOutCharactersAndShowModal(float completionTime)
+    {
+    // Fade out characters
+    yield return FadeOutCharacter(Blake, 0.5f);
+    yield return FadeOutCharacter(Jack, 0.5f);
+
+    // Wait for a short duration
+    yield return new WaitForSeconds(0.5f);
+
+    // Show success modal
+    SuccessModal.SetActive(true);
+
+    // Update success modal text with completion time
+    Text successText = SuccessModal.GetComponentInChildren<Text>();
+    successText.text = "Success!\n\n\nTime: " + completionTime.ToString("F2") + " seconds";
+}
+
+    // 캐릭터를 페이드 아웃하는 코루틴
+    IEnumerator FadeOutCharacter(GameObject character, float duration)
+    {
+        SpriteRenderer characterRenderer = character.GetComponent<SpriteRenderer>();
+        Color originalColor = characterRenderer.color;
+        Color targetColor = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            characterRenderer.color = Color.Lerp(originalColor, targetColor, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        characterRenderer.color = targetColor;
     }
 }

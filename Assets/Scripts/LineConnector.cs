@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class LineConnector : MonoBehaviour
 {
+    // Reference to the Jack and Blake transforms
     public Transform Jack;
     public Transform Blake;
 
+    // Reference to the LineRenderer component
     private LineRenderer lineRenderer;
 
+    // Color and maximum length settings for the line
     public Color lineColor = Color.green;
-    public float maxLineLength = 10f;
+    public float maxLineLength = 15f;
 
     void Start()
     {
+        // Initialize the LineRenderer component
         lineRenderer = gameObject.AddComponent<LineRenderer>();
 
+        // Configure LineRenderer properties
         lineRenderer.positionCount = 2;
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
@@ -24,32 +29,32 @@ public class LineConnector : MonoBehaviour
 
     void Update()
     {
-        // Jack 또는 Blake이 null이면 메서드 실행 중단
+        // If Jack or Blake is null, abort the method
         if (Jack == null || Blake == null)
         {
             return;
         }
 
-        // 선의 시작점을 Jack의 위치로 설정
+        // Set the starting point of the line to Jack's position
         lineRenderer.SetPosition(0, Jack.position);
 
-        // 캐릭터 간의 거리 계산
+        // Calculate the distance between the characters
         float distance = Vector3.Distance(Jack.position, Blake.position);
 
-        // 캐릭터 간의 거리가 최대 길이보다 크면 선을 최대 길이로 설정
+        // If the distance between characters is greater than the maximum length, set the line to the maximum length
         if (distance > maxLineLength)
         {
-            // 선을 최대 길이로 유지하면서 Jack과 Blake을 이동시킵니다.
+            // Keep the line at the maximum length while moving Jack and Blake
             Vector3 direction = (Blake.position - Jack.position).normalized;
             Vector3 newBlakePosition = Jack.position + direction * maxLineLength;
             Blake.position = newBlakePosition;
 
-            // 선 업데이트
+            // Update the line
             lineRenderer.SetPosition(1, newBlakePosition);
         }
         else
         {
-            // 캐릭터의 위치에 따라 선 업데이트
+            // Update the line based on the positions of the characters
             lineRenderer.SetPosition(1, Blake.position);
         }
     }

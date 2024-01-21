@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private float walk = 0;
     private float toward = 1f;
     [SerializeField]
-    public float fixedJumpHeight = 5f;
+    public float fixedJumpHeight = 15f;
     private float fallMultiplier = 2.5f;
     private float lowJumpMultiplier = 2f;
     private bool isGround = true;
@@ -20,8 +20,6 @@ public class Player : MonoBehaviour
     public GameObject jackPlayer;  // Assign the GameObject of Jack in the Unity Editor
     public GameObject blakePlayer; // Assign the GameObject of Blake in the Unity Editor
 
-    [SerializeField]
-    private float maxDistance = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +33,6 @@ public class Player : MonoBehaviour
     {
         Walk();
         Jump();
-
-        AdjustDistance();
     }
 
     void FixedUpdate()
@@ -97,7 +93,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if ((tag == "Jake" && Input.GetKeyDown(KeyCode.Space) && isGround) || (tag == "Blake" && Input.GetKeyDown(KeyCode.UpArrow) && isGround))
+        if ((tag == "Jake" && Input.GetKeyDown(KeyCode.W) && isGround) || (tag == "Blake" && Input.GetKeyDown(KeyCode.UpArrow) && isGround))
         {
             anim.SetBool("isWalk", true);
             rigid.velocity = new Vector2(rigid.velocity.x, fixedJumpHeight);
@@ -126,19 +122,7 @@ public class Player : MonoBehaviour
         return hit.collider != null && hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Box");
     }
 
-    void AdjustDistance()
-    {
-        if (blakePlayer != null)
-        {
-            float distance = Mathf.Abs(transform.position.x - blakePlayer.transform.position.x);
 
-            if (distance > maxDistance)
-            {
-                float adjustment = distance - maxDistance;
-                transform.position = new Vector3(transform.position.x - adjustment * Mathf.Sign(transform.position.x - blakePlayer.transform.position.x), transform.position.y, transform.position.z);
-            }
-        }
-    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
