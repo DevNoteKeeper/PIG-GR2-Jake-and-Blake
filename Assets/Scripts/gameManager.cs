@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject JackPrefab;
     public GameObject BlakePrefab;
     public Timer timer;
+    public Text successText;
 
     private GameObject Jack;
     private GameObject Blake;
@@ -86,21 +87,18 @@ public class GameManager : MonoBehaviour
                 completionTime = timer.CompletionTime;
 
                 // 두 캐릭터가 문에 도달하면 성공 모달 표시
-                ShowSuccessModal(completionTime);
+                HandleGameEnd(true); // 성공 상태로 게임 종료 처리
             }
 
-            if (Jack.transform.position.y < -5f || Blake.transform.position.y < -5f || timer.IsTimeOver)
+            if (!gameHasEnded && (Jack.transform.position.y < -5f || Blake.transform.position.y < -5f || timer.IsTimeOver))
             {
                 // 실패 모달 표시
-                ShowFailureModal();
-
-                // 게임 종료 처리
-                HandleGameEnd();
+                HandleGameEnd(false); // 실패 상태로 게임 종료 처리
             }
         }
     }
 
-    void HandleGameEnd()
+    void HandleGameEnd(bool isSuccess)
     {
         if (player != null)
         {
@@ -110,7 +108,20 @@ public class GameManager : MonoBehaviour
         if (!gameHasEnded)
         {
             gameHasEnded = true;
-            Invoke("RestartGame", restartDelay);
+
+            if (isSuccess)
+            {
+                // 성공한 경우 성공 모달 표시
+                ShowSuccessModal(completionTime);
+            }
+            else
+            {
+                // 실패한 경우 실패 모달 표시
+                ShowFailureModal();
+                Invoke("RestartGame", restartDelay);
+            }
+
+            
         }
     }
 
@@ -159,20 +170,24 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DelayedFadeOutCharactersAndShowModal(float completionTime)
     {
-    // Fade out characters
-    yield return FadeOutCharacter(Blake, 0.5f);
-    yield return FadeOutCharacter(Jack, 0.5f);
+        // Fade out characters
+        yield return FadeOutCharacter(Blake, 0.5f);
+        yield return FadeOutCharacter(Jack, 0.5f);
 
-    // Wait for a short duration
-    yield return new WaitForSeconds(0.5f);
+        // Wait for a short duration
+        yield return new WaitForSeconds(0.5f);
 
-    // Show success modal
-    SuccessModal.SetActive(true);
+        // Show success modal
+        SuccessModal.SetActive(true);
 
-    // Update success modal text with completion time
-    Text successText = SuccessModal.GetComponentInChildren<Text>();
-    successText.text = "Success!\n\n\nTime: " + completionTime.ToString("F2") + " seconds";
-}
+        // Update success modal text with completion time
+        successText = SuccessModal.GetComponentInChildren<Text>();
+        int minutes = Mathf.FloorToInt(completionTime / 60);
+        int seconds = Mathf.FloorToInt(completionTime % 60);
+        successText.text = string.Format("Success!\n\nTime: " + "{0:00}:{1:00}", minutes, seconds);
+    }
+
+
 
     // 캐릭터를 페이드 아웃하는 코루틴
     IEnumerator FadeOutCharacter(GameObject character, float duration)
