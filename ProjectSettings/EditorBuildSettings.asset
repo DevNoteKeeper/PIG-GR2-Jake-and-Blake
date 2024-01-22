@@ -23,12 +23,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Autumn.unity
     guid: 0051a715775128c49a3d092999f87456
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Winter.unity
     guid: 32705f878e21e50478ccebb2df5fe50d
   - enabled: 1
     path: Assets/Scenes/Outro.unity
     guid: 9bff8e87159c0b9418ce66800fe359d8
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: 4c19b60a384034a408185c87671f9fa3
+  - enabled: 1
+    path: Assets/Scenes/Help.unity
+    guid: 43bfe621c77842e4ca01324a9a6f6c05
   - enabled: 0
     path: Assets/Scenes/PlayerMovement.unity
     guid: 54ed2c35bdb8da3439eb5087d77c8897
