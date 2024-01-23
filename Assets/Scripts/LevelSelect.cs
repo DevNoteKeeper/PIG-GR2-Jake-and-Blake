@@ -12,7 +12,7 @@ public class LevelSelect : MonoBehaviour
     public Button winterButton;
 
     public Image summerLockImage;
-    public Image autumnLockImage;
+    public Image springLockImage;
     public Image winterLockImage;
 
     void Start()
@@ -26,15 +26,15 @@ public class LevelSelect : MonoBehaviour
             int highestPassedLevel = loadedData.highestPassedLevel;
 
             // Set interactability for each button
-            SetButtonInteractivity(springButton, true);
-            SetButtonInteractivity(summerButton, highestPassedLevel >= 2);
-            SetButtonInteractivity(autumnButton, highestPassedLevel >= 3);
-            SetButtonInteractivity(winterButton, highestPassedLevel >= 4);
+            SetButtonInteractivity(autumnButton, true);
+            SetButtonInteractivity(winterButton, highestPassedLevel >= 2);
+            SetButtonInteractivity(springButton, highestPassedLevel >= 3);
+            SetButtonInteractivity(summerButton, highestPassedLevel >= 4);
 
             // Hide lock images based on the highest passed level
-            HideLockImage(summerLockImage, highestPassedLevel >= 2);
-            HideLockImage(autumnLockImage, highestPassedLevel >= 3);
-            HideLockImage(winterLockImage, highestPassedLevel >= 4);
+            HideLockImage(winterLockImage, highestPassedLevel >= 2);
+            HideLockImage(springLockImage, highestPassedLevel >= 3);
+            HideLockImage(summerLockImage, highestPassedLevel >= 4);
         }
         else
         {
@@ -56,14 +56,23 @@ public class LevelSelect : MonoBehaviour
 
     public void SpringStart()
     {
-        SceneManager.LoadScene("Spring");
+        PlayerData loadedData = SaveSystem.LoadPlayerData();
+        if (loadedData != null && loadedData.highestPassedLevel >= 3)
+        {
+            SceneManager.LoadScene("Spring");
+        }
+        else
+        {
+            // Handle the case when the player hasn't passed the required level
+            Debug.Log("Cannot access Autumn level. Pass the previous levels first.");
+        }
     }
 
     public void SummerStart()
     {
         // Check if the player has passed Summer level
         PlayerData loadedData = SaveSystem.LoadPlayerData();
-        if (loadedData != null && loadedData.highestPassedLevel >= 2)
+        if (loadedData != null && loadedData.highestPassedLevel >= 4)
         {
             SceneManager.LoadScene("Summer");
         }
@@ -76,24 +85,14 @@ public class LevelSelect : MonoBehaviour
 
     public void AutumnStart()
     {
-        // Check if the player has passed Autumn level
-        PlayerData loadedData = SaveSystem.LoadPlayerData();
-        if (loadedData != null && loadedData.highestPassedLevel >= 3)
-        {
-            SceneManager.LoadScene("Autumn");
-        }
-        else
-        {
-            // Handle the case when the player hasn't passed the required level
-            Debug.Log("Cannot access Autumn level. Pass the previous levels first.");
-        }
+        SceneManager.LoadScene("Autumn");
     }
 
     public void WinterStart()
     {
         // Check if the player has passed Winter level
         PlayerData loadedData = SaveSystem.LoadPlayerData();
-        if (loadedData != null && loadedData.highestPassedLevel >= 4)
+        if (loadedData != null && loadedData.highestPassedLevel >= 2)
         {
             SceneManager.LoadScene("Winter");
         }
