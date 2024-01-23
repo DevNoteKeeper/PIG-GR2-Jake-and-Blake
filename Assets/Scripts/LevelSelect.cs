@@ -64,7 +64,7 @@ public class LevelSelect : MonoBehaviour
         else
         {
             // Handle the case when the player hasn't passed the required level
-            Debug.Log("Cannot access Autumn level. Pass the previous levels first.");
+            Debug.Log("Cannot access Spring level. Pass the previous levels first.");
         }
     }
 
@@ -102,4 +102,6 @@ public class LevelSelect : MonoBehaviour
             Debug.Log("Cannot access Winter level. Pass the previous levels first.");
         }
     }
+
+
 }

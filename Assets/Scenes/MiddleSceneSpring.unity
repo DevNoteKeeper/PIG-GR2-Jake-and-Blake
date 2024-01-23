@@ -136,6 +136,8 @@ GameObject:
   - component: {fileID: 502897776}
   - component: {fileID: 502897775}
   - component: {fileID: 502897774}
+  - component: {fileID: 502897780}
+  - component: {fileID: 502897779}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -162,6 +164,8 @@ PlayableDirector:
     value: {fileID: 1936691404}
   - key: {fileID: 8474765697759489308, guid: 6a3e9f3f7d2f247c3b3ada2a11fa605d, type: 2}
     value: {fileID: 1720825736}
+  - key: {fileID: -696014068813227608, guid: 6a3e9f3f7d2f247c3b3ada2a11fa605d, type: 2}
+    value: {fileID: 502897779}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &502897775
@@ -248,6 +252,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &502897779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502897773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals: []
+    m_Events: []
+--- !u!114 &502897780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502897773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4989cf502c4b70143ade513c34c57b50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneToLoad: Spring
 --- !u!1 &1475137342
 GameObject:
   m_ObjectHideFlags: 0

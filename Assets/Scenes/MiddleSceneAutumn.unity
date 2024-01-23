@@ -296,6 +296,8 @@ GameObject:
   - component: {fileID: 1283665739}
   - component: {fileID: 1283665738}
   - component: {fileID: 1283665742}
+  - component: {fileID: 1283665743}
+  - component: {fileID: 1283665744}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -403,8 +405,53 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 5045605938677247843, guid: 1e3d22becc4364e43bccefc5263b54a3, type: 2}
     value: {fileID: 1740707369}
+  - key: {fileID: -8867280646863064476, guid: 1e3d22becc4364e43bccefc5263b54a3, type: 2}
+    value: {fileID: 1283665743}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &1283665743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283665737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: d53a33a75f51d4b869dc21ca2fe303a8, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1283665744}
+          m_TargetAssemblyTypeName: StoryManageable, Assembly-CSharp
+          m_MethodName: OnTimelineEnd
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1283665744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283665737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4989cf502c4b70143ade513c34c57b50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneToLoad: Winter
 --- !u!1 &1740707369
 GameObject:
   m_ObjectHideFlags: 0
