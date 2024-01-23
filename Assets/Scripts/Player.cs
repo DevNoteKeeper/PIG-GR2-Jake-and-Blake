@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private bool isOnSnowLand = false;
     private Rigidbody2D rigid;
     private Animator anim;
+    [SerializeField] private AudioSource jumpSoundEffect;
 
     public GameObject jackPlayer;  // Assign the GameObject of Jack in the Unity Editor
     public GameObject blakePlayer; // Assign the GameObject of Blake in the Unity Editor
@@ -95,6 +96,7 @@ public class Player : MonoBehaviour
     {
         if ((tag == "Jake" && Input.GetKeyDown(KeyCode.W) && isGround) || (tag == "Blake" && Input.GetKeyDown(KeyCode.UpArrow) && isGround))
         {
+            jumpSoundEffect.Play();
             anim.SetBool("isWalk", true);
             rigid.velocity = new Vector2(rigid.velocity.x, fixedJumpHeight);
             isGround = false;

@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     public GameObject SuccessModal;
     public GameObject FailureModal;
 
+    [SerializeField] private AudioSource deathSoundEffect;
+    [SerializeField] private AudioSource successSoundEffect;
+
     void Start()
     {
         SuccessModal.SetActive(false);
@@ -85,6 +88,7 @@ public class GameManager : MonoBehaviour
             if (!timer.IsTimeOver && CheckDoorReached(Jack) && CheckDoorReached(Blake))
             {
                 completionTime = timer.CompletionTime;
+                successSoundEffect.Play();
 
                 // 두 캐릭터가 문에 도달하면 성공 모달 표시
                 HandleGameEnd(true); // 성공 상태로 게임 종료 처리
@@ -93,7 +97,10 @@ public class GameManager : MonoBehaviour
             if (!gameHasEnded && (Jack.transform.position.y < -5f || Blake.transform.position.y < -5f || timer.IsTimeOver))
             {
                 // 실패 모달 표시
+                deathSoundEffect.Play();
                 HandleGameEnd(false); // 실패 상태로 게임 종료 처리
+                
+                 
             }
         }
     }
