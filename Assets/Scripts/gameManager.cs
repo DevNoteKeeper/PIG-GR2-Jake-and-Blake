@@ -91,7 +91,11 @@ public class GameManager : MonoBehaviour
             if (!timer.IsTimeOver && CheckDoorReached(Jack) && CheckDoorReached(Blake))
             {
                 completionTime = timer.CompletionTime;
-                successSoundEffect.Play();
+
+                if (successSoundEffect != null)
+                {
+                    successSoundEffect.Play();
+                }
 
                 // 두 캐릭터가 문에 도달하면 성공 모달 표시
                 HandleGameEnd(true); // 성공 상태로 게임 종료 처리

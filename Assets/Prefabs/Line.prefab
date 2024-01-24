@@ -204,3 +204,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Jack: {fileID: 5417866415839733952, guid: 0b8025947f51f8043a365cfe39dd76c9, type: 3}
   Blake: {fileID: 115447282799283733, guid: 495851f23504d674cbfcd1fc6c009b93, type: 3}
+  lineColor: {r: 0, g: 1, b: 0, a: 1}
+  maxLineLength: 10
