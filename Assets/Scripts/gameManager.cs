@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     public GameObject SuccessModal;
     public GameObject FailureModal;
 
+    public Vector3 m_JakeSpawnLocation = new Vector3(-7, 1, 0);
+    public Vector3 m_BlakeSpawnLocation = new Vector3(-7, 1, 0);
+
     [SerializeField] private AudioSource deathSoundEffect;
     [SerializeField] private AudioSource successSoundEffect;
 
@@ -67,8 +70,8 @@ public class GameManager : MonoBehaviour
 
     void InitializeCharacters()
     {
-        Blake = Instantiate(BlakePrefab, new Vector3(-7, 1, 0), Quaternion.identity);
-        Jack = Instantiate(JackPrefab, new Vector3(-7, 1, 0), Quaternion.identity);
+        Blake = Instantiate(BlakePrefab, m_BlakeSpawnLocation, Quaternion.identity);
+        Jack = Instantiate(JackPrefab, m_JakeSpawnLocation, Quaternion.identity);
     }
 
     void InitializeLineConnector()
@@ -97,10 +100,12 @@ public class GameManager : MonoBehaviour
             if (!gameHasEnded && (Jack.transform.position.y < -5f || Blake.transform.position.y < -5f || timer.IsTimeOver))
             {
                 // 실패 모달 표시
-                deathSoundEffect.Play();
                 HandleGameEnd(false); // 실패 상태로 게임 종료 처리
-                
-                 
+
+                if (deathSoundEffect != null)
+                {
+                    deathSoundEffect.Play();
+                }
             }
         }
     }
