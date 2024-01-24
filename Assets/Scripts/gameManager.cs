@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     void UpdateCameraPosition()
     {
         Vector3 playerPos = Blake.transform.position;
-        mainCamera.transform.position = new Vector3(playerPos.x, playerPos.y, -10);
+        mainCamera.transform.position = new Vector3(playerPos.x, mainCamera.transform.position.y, -10);
         Debug.Log("Camera Position: " + mainCamera.transform.position);
     }
 
