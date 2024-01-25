@@ -33749,6 +33749,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FailModal
       objectReference: {fileID: 0}
+    - target: {fileID: 5890430480043105371, guid: 66a855ae3c3adda438bf1b96fe7caa0e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6265389124935542563, guid: 66a855ae3c3adda438bf1b96fe7caa0e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
