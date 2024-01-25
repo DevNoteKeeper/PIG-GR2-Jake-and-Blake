@@ -2341,7 +2341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeTxt: {fileID: 102982309}
-  totalTime: 60
+  totalTime: 180
 --- !u!114 &1142036155
 MonoBehaviour:
   m_ObjectHideFlags: 0
