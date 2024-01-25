@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 0.07
-  fixedJumpHeight: 15
+  fixedJumpHeight: 13
   jumpSoundEffect: {fileID: -4434126304936554246}
   jackPlayer: {fileID: 2356949257094404775}
   blakePlayer: {fileID: 890044483153179431, guid: 495851f23504d674cbfcd1fc6c009b93, type: 3}
@@ -316,7 +316,7 @@ AudioSource:
   m_GameObject: {fileID: 2356949257094404775}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 92bfdfcac60a016468b3db945674d96e, type: 2}
   m_audioClip: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1

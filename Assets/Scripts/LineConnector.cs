@@ -13,7 +13,7 @@ public class LineConnector : MonoBehaviour
 
     // Color and maximum length settings for the line
     public Color lineColor = Color.green;
-    public float maxLineLength = 15f;
+    public float maxLineLength = 8;
 
     void Start()
     {

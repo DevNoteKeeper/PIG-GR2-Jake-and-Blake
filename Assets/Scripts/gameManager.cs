@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     public GameObject SuccessModal;
     public GameObject FailureModal;
 
+    public Vector3 m_JakeSpawnLocation = new Vector3(-7, 1, 0);
+    public Vector3 m_BlakeSpawnLocation = new Vector3(-7, 1, 0);
+
     [SerializeField] private AudioSource deathSoundEffect;
     [SerializeField] private AudioSource successSoundEffect;
 
@@ -61,14 +64,14 @@ public class GameManager : MonoBehaviour
     void UpdateCameraPosition()
     {
         Vector3 playerPos = Blake.transform.position;
-        mainCamera.transform.position = new Vector3(playerPos.x, playerPos.y, -10);
+        mainCamera.transform.position = new Vector3(playerPos.x, mainCamera.transform.position.y, -10);
         Debug.Log("Camera Position: " + mainCamera.transform.position);
     }
 
     void InitializeCharacters()
     {
-        Blake = Instantiate(BlakePrefab, new Vector3(-7, 1, 0), Quaternion.identity);
-        Jack = Instantiate(JackPrefab, new Vector3(-7, 1, 0), Quaternion.identity);
+        Blake = Instantiate(BlakePrefab, m_BlakeSpawnLocation, Quaternion.identity);
+        Jack = Instantiate(JackPrefab, m_JakeSpawnLocation, Quaternion.identity);
     }
 
     void InitializeLineConnector()
@@ -84,23 +87,29 @@ public class GameManager : MonoBehaviour
     {
         if (Jack != null && Blake != null)
         {
-            // Jack과 Blake이 모두 문에 도달했을 때
+            // When both Jack and Blake reach the door
             if (!timer.IsTimeOver && CheckDoorReached(Jack) && CheckDoorReached(Blake))
             {
                 completionTime = timer.CompletionTime;
-                successSoundEffect.Play();
 
-                // 두 캐릭터가 문에 도달하면 성공 모달 표시
-                HandleGameEnd(true); // 성공 상태로 게임 종료 처리
+                if (successSoundEffect != null)
+                {
+                    successSoundEffect.Play();
+                }
+
+                // Display success modal when both characters reach the door
+                HandleGameEnd(true); // End the game in success state
             }
 
             if (!gameHasEnded && (Jack.transform.position.y < -5f || Blake.transform.position.y < -5f || timer.IsTimeOver))
             {
-                // 실패 모달 표시
-                deathSoundEffect.Play();
-                HandleGameEnd(false); // 실패 상태로 게임 종료 처리
-                
-                 
+                // Display failure modal
+                HandleGameEnd(false); // End the game in failure state
+
+                if (deathSoundEffect != null)
+                {
+                    deathSoundEffect.Play();
+                }
             }
         }
     }
@@ -118,17 +127,14 @@ public class GameManager : MonoBehaviour
 
             if (isSuccess)
             {
-                // 성공한 경우 성공 모달 표시
+                // Display success modal
                 ShowSuccessModal(completionTime);
             }
             else
             {
-                // 실패한 경우 실패 모달 표시
+                // Display failure modal
                 ShowFailureModal();
-                Invoke("RestartGame", restartDelay);
             }
-
-            
         }
     }
 
@@ -149,10 +155,10 @@ public class GameManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 이 부분은 문과 충돌 여부를 확인할 때 사용하는 코드입니다.
+        // This part is used to check if the characters collide with the door
         if (collision.CompareTag("Door"))
         {
-            // 문에 도달하면 해당 캐릭터를 천천히 사라지게 함
+            // When reaching the door, make the character slowly disappear
             StartCoroutine(FadeOutCharacter(collision.gameObject, 2f));
         }
     }
@@ -160,13 +166,13 @@ public class GameManager : MonoBehaviour
     bool CheckDoorReached(GameObject character)
     {
         GameObject door = GameObject.FindGameObjectWithTag("Door");
-        
+
         if (door != null)
         {
-            // 캐릭터와 문 사이의 거리를 측정하여 문에 도달했는지 여부를 판단합니다.
+            // Measure the distance between the character and the door to determine if they reached the door
             float distanceToDoor = Vector2.Distance(character.transform.position, door.transform.position);
-            
-            return distanceToDoor < 1.6f; // 예시로 1.0f라는 거리 내에 있다면 문에 도달했다고 판단합니다. 조건을 적절히 수정하세요.
+
+            return distanceToDoor < 1.6f; // If within a certain distance, consider reaching the door. Modify the condition appropriately.
         }
         else
         {
@@ -194,9 +200,7 @@ public class GameManager : MonoBehaviour
         successText.text = string.Format("Success!\n\nTime: " + "{0:00}:{1:00}", minutes, seconds);
     }
 
-
-
-    // 캐릭터를 페이드 아웃하는 코루틴
+    // Coroutine to fade out the character
     IEnumerator FadeOutCharacter(GameObject character, float duration)
     {
         SpriteRenderer characterRenderer = character.GetComponent<SpriteRenderer>();
