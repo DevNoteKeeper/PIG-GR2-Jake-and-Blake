@@ -4396,7 +4396,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 92bfdfcac60a016468b3db945674d96e, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a0ca8964c08d54c5dbebf245bdc474ca, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -4599,8 +4599,8 @@ MonoBehaviour:
   mainCamera: {fileID: 411512796}
   SuccessModal: {fileID: 1523573985}
   FailureModal: {fileID: 1079682009}
-  m_JakeSpawnLocation: {x: -5, y: 1, z: 0}
-  m_BlakeSpawnLocation: {x: -5, y: 1, z: 0}
+  m_JakeSpawnLocation: {x: -4, y: 1, z: 0}
+  m_BlakeSpawnLocation: {x: -4, y: 1, z: 0}
   deathSoundEffect: {fileID: 912118742}
   successSoundEffect: {fileID: 912118741}
 --- !u!4 &912118744

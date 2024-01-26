@@ -18,17 +18,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Intro.unity
     guid: b7784ef1b9be5412cb5607ce2e28c718
   - enabled: 1
+    path: Assets/Scenes/Autumn.unity
+    guid: 0051a715775128c49a3d092999f87456
+  - enabled: 1
+    path: Assets/Scenes/Winter.unity
+    guid: 29c29c7691d8c48b5a5b743acd6324c8
+  - enabled: 1
     path: Assets/Scenes/Spring.unity
     guid: b04b420fff6bc91448075044b338aa77
   - enabled: 1
     path: Assets/Scenes/Summer.unity
     guid: 3b31576ee65ce6649b2aeaf1eddfd5c8
-  - enabled: 1
-    path: Assets/Scenes/Autumn.unity
-    guid: 0051a715775128c49a3d092999f87456
-  - enabled: 0
-    path: Assets/Scenes/Winter.unity
-    guid: 32705f878e21e50478ccebb2df5fe50d
   - enabled: 1
     path: Assets/Scenes/Outro.unity
     guid: 9bff8e87159c0b9418ce66800fe359d8
