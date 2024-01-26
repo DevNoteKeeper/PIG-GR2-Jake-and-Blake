@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AudioSource deathSoundEffect;
     [SerializeField] private AudioSource successSoundEffect;
+    private bool successSound = false;
 
     void Start()
     {
@@ -92,9 +93,12 @@ public class GameManager : MonoBehaviour
             {
                 completionTime = timer.CompletionTime;
 
-                if (successSoundEffect != null)
+                if (!successSound &&successSoundEffect != null)
                 {
-                    successSoundEffect.Play();
+                        successSoundEffect.Play();
+                        successSound=true;;
+                    
+                    
                 }
 
                 // Display success modal when both characters reach the door
