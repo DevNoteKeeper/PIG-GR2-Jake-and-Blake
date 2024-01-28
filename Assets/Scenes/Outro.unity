@@ -701,8 +701,8 @@ MonoBehaviour:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 504951580}
-          m_TargetAssemblyTypeName: OutroScene, Assembly-CSharp
-          m_MethodName: OnOutroEnd
+          m_TargetAssemblyTypeName: StoryManageable, Assembly-CSharp
+          m_MethodName: OnTimelineEnd
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
